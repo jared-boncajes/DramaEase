@@ -1,0 +1,15 @@
+{
+  "dramas": [
+    {
+      "id": "my-first-drama",
+      "title": "REPLACE: Drama title as it should appear on the TV",
+      "description": "Optional short description.",
+      "posterUrl": "https://example.com/optional-poster.jpg",
+      "pageUrl": "https://kisskh.do/REPLACE-WITH-THE-REAL-DRAMA-PAGE-ADDRESS",
+      "episodes": [
+        { "number": 1, "title": "Optional episode title", "pageUrl": "https://kisskh.do/REPLACE-WITH-EPISODE-1-PAGE-ADDRESS" },
+        { "number": 2, "pageUrl": "https://kisskh.do/REPLACE-WITH-EPISODE-2-PAGE-ADDRESS" }
+      ]
+    }
+  ]
+}

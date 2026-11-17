@@ -30,7 +30,8 @@ automating around an anti-bot safeguard (or using undocumented endpoints), which
 | Subtitles from KissKH | ❌ Not available natively | Subtitles exist only inside the website's own player. |
 | Direct episode links | ✅ Supported **as links you provide** | You (or a family helper) paste episode page addresses into `kisskh_library.json`. Only `https://kisskh.do` and its subdomains are accepted. |
 | Netflix-style browsing, favorites, Continue Watching over that saved list | ✅ Implemented | Local list + Room database. Needs a laptop/TV test. |
-| Opening an episode on the website | ✅ Implemented — **works only if the TV has a browser** | Uses a standard `ACTION_VIEW` intent. Many Google TV / Android TV devices ship **without** a web browser; a browser must be installed (from the Play Store) before this works. Whether the site's challenge passes in that browser is **not verified**. |
+| Watching a saved page **inside the app** ("Watch Here") | ✅ Implemented, **untested** | A plain Android `WebView` shows the kisskh.do page with the site's own player. DramaEase reads/changes nothing on the page and does not touch the bot check; it only restricts navigation to kisskh.do, blocks pop-ups, supports the page's fullscreen video, and adds *Back to Episodes* / *Next Episode* buttons. **Not verified:** whether the site's challenge passes in the TV's WebView, whether its player works with the remote's arrow keys, or whether it shows ads/pop-ups. |
+| "Open in Browser" (fallback) | ✅ Implemented | Standard `ACTION_VIEW`; needs a browser installed on the TV. |
 | Playback progress for website playback | ❌ Impossible | The app cannot observe what happens in another app. It records only "page opened" (shown as *Opened before*), never "watched", and never shows a progress bar for it. |
 
 ## How the family list works

@@ -142,7 +142,7 @@ sealed interface PlayerUi {
         val drama: Drama, val episode: Episode, val option: PlaybackOption.NativeStream,
         val resumeMs: Long, val previous: Episode?, val next: Episode?,
     ) : PlayerUi
-    data class External(val drama: Drama, val episode: Episode, val option: PlaybackOption.ExternalWebsite) : PlayerUi
+    data class External(val drama: Drama, val episode: Episode, val option: PlaybackOption.ExternalWebsite, val next: Episode?) : PlayerUi
 }
 
 class PlayerViewModel(private val library: Library, private val dramaId: String, private val episodeId: String) : ViewModel() {
@@ -168,7 +168,7 @@ class PlayerViewModel(private val library: Library, private val dramaId: String,
                             episodes.getOrNull(i - 1), episodes.getOrNull(i + 1),
                         )
                     }
-                    is PlaybackOption.ExternalWebsite -> PlayerUi.External(drama, episode, option)
+                    is PlaybackOption.ExternalWebsite -> PlayerUi.External(drama, episode, option, episodes.getOrNull(episodes.indexOf(episode) + 1))
                     is PlaybackOption.Unavailable -> PlayerUi.Unavailable
                 }
             } catch (_: Exception) {

@@ -3,6 +3,8 @@
 Environment: Linux cloud sandbox, JDK 21, Gradle 8.9 (wrapper), Android SDK 35. **No emulator or TV hardware was available
 (no `/dev/kvm`), so nothing below was run on an Android device.** "Not run" means exactly that.
 
+Added later: in-app website viewer (`WebsiteScreen`) — compiles and `assembleDebug` succeeds; **behaviour not run**.
+
 ## Ran and passed (2026-11-17)
 | What | Result |
 |---|---|
@@ -32,7 +34,7 @@ Tick these off on the Android TV emulator (virtual remote), then repeat on the T
 - [ ] Return from Details/Player/Settings to Home: focus returns to the card you left.
 - [ ] Settings: Easy Mode, Text Size (3 sizes), High Contrast, Language (English/Filipino), Subtitle Size, Source — all survive restart.
 - [ ] Turn the TV's Wi-Fi off, press play: a friendly message with **Try Again** and **Go Back** (no technical text).
-- [ ] Switch source to KissKH list with no file: friendly empty message. With a list file: dramas appear; **Open the Website** works only if a browser is installed; otherwise shows the "no browser" message.
+- [ ] Switch source to KissKH list with no file: friendly empty message. With a list file: dramas appear; **Watch Here** loads the page in the app (check: page loads, bot check passes, video plays, arrow keys/OK usable, Back leaves fullscreen then the page, Next Episode works); **Open in Browser** works only if a browser is installed, otherwise shows the "no browser" message.
 - [ ] Press the remote's Home button during playback: returns to the TV home; reopening resumes.
 - [ ] Update test: install over the top with `adb install -r` (same key) — favorites and progress remain.
 - [ ] Performance feel on the actual BRAVIA (scrolling smoothness, startup time).

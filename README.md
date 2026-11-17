@@ -5,7 +5,7 @@ Kotlin · Jetpack Compose for TV · Media3/ExoPlayer · Room · DataStore · Coi
 
 > **Read this first — what is and isn't real**
 > * **Working & built:** the whole native app (Home, details, episodes, search, favorites, continue watching, settings, player, English/Filipino, large text, high contrast) with a **Demo** catalog of fictional dramas playing openly licensed sample videos. It compiles, 11 unit tests pass, and a signed release APK builds. **It has not yet been run on an emulator or TV** (see `docs/TEST_RESULTS.md`).
-> * **KissKH (`https://kisskh.do`) — NOT natively integrated.** The site answers with a Cloudflare anti-bot challenge and has no documented API or licence for third-party apps, so DramaEase does **not** fetch its catalog or play its streams. What exists: a family-curated list of kisskh.do links shown in the native interface, with an **Open the Website** button that needs a TV browser. Details: `docs/KISSKH_ASSESSMENT.md`.
+> * **KissKH (`https://kisskh.do`) — NOT natively integrated.** The site answers with a Cloudflare anti-bot challenge and has no documented API or licence for third-party apps, so DramaEase does **not** fetch its catalog or play its streams. What exists: a family-curated list of kisskh.do links shown in the native interface, with a **Watch Here** button that shows the page inside the app (site's own player, WebView — untested on a TV) and an **Open in Browser** fallback. Details: `docs/KISSKH_ASSESSMENT.md`.
 > * Demo mode is practice content only and is labeled "Practice mode" on screen. It is not a KissKH integration.
 
 ## The aunt's flow
@@ -39,7 +39,7 @@ See `docs/BUILD_AND_INSTALL.md` (Android Studio, emulator, developer options, AD
 
 ## Known limitations
 * Not yet run on an emulator/BRAVIA: focus feel, playback, persistence need your confirmation (checklist in `docs/TEST_RESULTS.md`).
-* KissKH: no automatic catalog/search/episodes/native playback/subtitles/progress (see assessment). Website playback needs a TV browser, which many Android/Google TV devices lack, and it is unverified whether the site's challenge passes there.
+* KissKH: no automatic catalog/search/episodes/native playback/subtitles/progress (see assessment). Website playback (WebView) is untested: it is unverified whether the site's challenge passes in the TV's WebView and whether its player is usable with a remote. The site's own ads/pop-up behaviour is outside DramaEase's control. "Open in Browser" needs a browser installed.
 * Demo videos stream from Google-hosted sample files; they need internet and could move.
 * Demo dramas have no poster images (the app draws title cards); `Coil` is wired for provider-supplied images and unverified on-device.
 * Filipino strings are my translation — please have a native speaker review them.

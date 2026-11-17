@@ -82,7 +82,7 @@ fun PlayerScreen(
         when (val state = ui) {
             PlayerUi.Loading -> CenterMessage(LocalStrings.current.loading)
             PlayerUi.Unavailable -> ErrorPanel(LocalStrings.current.unavailable, onRetry = vm::load, onBack = onBack)
-            is PlayerUi.External -> ExternalPanel(state, onOpened = vm::markOpenedExternally, onBack = onBack)
+            is PlayerUi.External -> ExternalPanel(state, onOpened = vm::markOpenedExternally, onBack = onBack, onPlayEpisode = onPlayEpisode)
             is PlayerUi.Native -> NativePlayer(state, vm, settings, onBack, onPlayEpisode)
         }
     }
@@ -114,10 +114,18 @@ private fun ErrorPanel(message: String, onRetry: () -> Unit, onBack: () -> Unit)
 
 /** Playback that only exists on the original website. We say so plainly and never record it as watched. */
 @Composable
-private fun ExternalPanel(state: PlayerUi.External, onOpened: () -> Unit, onBack: () -> Unit) {
+private fun ExternalPanel(state: PlayerUi.External, onOpened: () -> Unit, onBack: () -> Unit, onPlayEpisode: (String) -> Unit) {
     val s = LocalStrings.current
     val context = LocalContext.current
     var noBrowser by remember { mutableStateOf(false) }
+    var showWeb by remember { mutableStateOf(false) }
+    if (showWeb) {
+        WebsiteScreen(
+            url = state.option.pageUrl, onBack = onBack,
+            onNext = state.next?.let { n -> { onPlayEpisode(n.id) } },
+        )
+        return
+    }
     val openReq = remember { FocusRequester() }
     LaunchedEffect(Unit) { runCatching { openReq.requestFocus() } }
     Column(
@@ -129,11 +137,15 @@ private fun ExternalPanel(state: PlayerUi.External, onOpened: () -> Unit, onBack
         Text(s.externalExplain, style = DramaType.body, color = Color(0xFFDDDDDD), textAlign = TextAlign.Center)
         if (noBrowser) Text(s.noBrowser, style = DramaType.body, color = LocalDramaColors.current.error, textAlign = TextAlign.Center)
         BigButton(
-            s.openWebsite, primary = true, modifier = Modifier.focusRequester(openReq),
+            s.watchHere, primary = true, modifier = Modifier.focusRequester(openReq),
+            onClick = { onOpened(); showWeb = true }, // only "opened" is recorded; viewing cannot be observed
+        )
+        BigButton(
+            s.openInBrowser,
             onClick = {
                 try {
                     context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(state.option.pageUrl)))
-                    onOpened() // only "opened" is recorded; actual viewing cannot be observed
+                    onOpened()
                 } catch (_: ActivityNotFoundException) {
                     noBrowser = true
                 }

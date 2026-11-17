@@ -49,11 +49,15 @@ class Strings(private val lang: AppLanguage) {
     val playFailed get() = t("This video can't play right now. Please try again.", "Hindi ma-play ang video ngayon. Subukan muli.")
     val unavailable get() = t("This episode isn't available.", "Hindi available ang episode na ito.")
     val noEpisodes get() = t("Episodes aren't available for this drama.", "Walang available na episode para sa drama na ito.")
+    val watchHere get() = t("Watch Here", "Manood Dito")
+    val openInBrowser get() = t("Open in Browser", "Buksan sa Browser")
+    val websiteHint get() = t("Use the arrow keys and OK on the page. Press Back to leave.", "Gamitin ang arrow keys at OK sa page. Pindutin ang Back para lumabas.")
+    val websiteFailed get() = t("The website didn't open. Check the internet and try again.", "Hindi nabuksan ang website. Tingnan ang internet at subukan muli.")
     val openWebsite get() = t("Open the Website", "Buksan ang Website")
     val externalExplain
         get() = t(
-            "This episode plays on the KissKH website, not inside DramaEase. Pause, rewind and subtitles use the website's own buttons.",
-            "Sa website ng KissKH pinapanood ang episode na ito, hindi sa DramaEase. Ang pause, rewind at subtitle ay gamit ang sariling button ng website.",
+            "This episode plays from the KissKH website inside DramaEase. Pause, rewind and subtitles use the website's own buttons.",
+            "Mula sa website ng KissKH pinapanood ang episode na ito sa loob ng DramaEase. Ang pause, rewind at subtitle ay gamit ang sariling button ng website.",
         )
     val noBrowser
         get() = t(
